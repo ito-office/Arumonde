@@ -3,9 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Arumonde</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
+
 <body>
-    
+    <!-- //ハンバーガーメニュー -->
+    <!-- ドロワーボタン -->
+    <!-- <button class="drawerButton">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button> -->
+
+    <header>
+        <button type="button" class="hamburger-btn" id="js-hamburger-btn" aria-label="メニュー開閉">
+        <span></span>
+        </button>
+
+        <nav id="hamburger-menu">
+            <div class="hamburger-content">
+                <ul class="menu-list">
+                    <li><a href="#">TOP</a></li>
+                    <li><a href="#">絶望を知っているあなたへ</a></li>
+                    <li><a href="#">3つの丸投げ救済術</a></li>
+                    <li><a href="#">20分の余白</a></li>
+                    <li><a href="#">Arumondeからの手紙</a></li>
+                    <li><a href="#">会社情報</a></li>
+                    <li><a href="#">利用規約</a></li> 
+                </ul>
+            </div>
+
+            <div class="download-container">
+                <ul>
+                    <li><a href="#"><img src="images/Download_AppStore.svg" alt="Appのダウンロードボタン"></a></li>
+                    <li><a href="#"><img src="images/Download_GooglePlay.svg" alt="GooglePlayのダウンロードボタン"></a></li>
+                    <li><a href="#"><img src="images/share.png" alt="shareボタンのアイコン"></a></li>
+                </ul>
+            </div>
+
+            <div class="menu-logo">
+            <!-- <a href="/"> -->
+                <img src="images/logo.png" alt="ブランドロゴ">
+            <!-- </a> -->
+            </div>
+        </nav> 
+    </header>
+
+    <!-- //メイン TOP画像 -->
+    <div id="mainContents">
+        <div class="TOP"></div>
+        <!-- <div class="rightContents"></div> -->
+        <p>献立の悩み、AIに『全部丸投げ』</p>
+    </div>
+
+
+    <main>
+        <section id="despair" class="section-despair">
+            <div class="despair-container">
+                
+                <h2 class="despair-heading">
+                    「今日、何作ろう？」の<br>
+                    絶望を知っているあなたへ。</h2>
+
+                <div class="despair-content-grid">
+
+                    <article class="despair-card">
+                        <h3 class="scene-title">【駅の改札で】</h3>
+                        <div class="scene-img">
+                            <img src="images/sec01_01.jpg" alt="駅の改札でフリーズする様子">
+                        </div>
+                        <div class="scene-body">
+                            <p>冷蔵庫の中身を思い出そうとしてフリーズ。</p>
+                        </div>
+                    </article>
+
+                    <article class="despair-card">
+                        <h3 class="scene-title">【スーパーの入り口で】</h3>
+                        <div class="scene-img">
+                            <img src="images/sec01_02.jpg" alt="スーパーの入り口で泣き叫ぶ子供と困る様子">
+                        </div>
+                        <div class="scene-body">
+                            <p>泣き叫ぶ1歳児。カゴを持つ余裕もなく、<br>
+                                結局何も買わずに店を出る。</p>
+                        </div>
+                    </article>
+
+                    <article class="despair-card">
+                        <h3 class="scene-title">【キッチンの前で】</h3>
+                        <div class="scene-img">
+                            <img src="images/sec01_03.jpg" alt="台所で動けなくなっている様子">
+                        </div>
+                        <div class="scene-body">
+                            <p>材料はある。でも・・・<br>
+                                レシピを調べる気力も、洗い物をする体力も、<br>
+                                もう残っていない。</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="section-solutions">
+            <div class="solutions-container">
+
+            <h2 class="solutions-heading">
+                アルモンデが提供する3つの「丸投げ」救済術。</h2>
+
+            <div class="solutions-list">
+
+                <div class="solution-item">
+                    <div class="solution-header">
+                        <span class="solution-number">①</span>
+                        <h3 class="solution-title">
+                            【一致率】<br>
+                            「ほぼ作れる」なら、それで合格。</h3>
+                    </div>
+                    <div class="solution-visual">
+                        <img src="images/sec02_01.jpg" alt="レシピの一致率表示のイメージ">
+                    </div>
+                    <div class="solution-body">
+                        <p>100%のレシピを探すのはやめましょう。
+                            80%あれば、AIが「代用」を提案します。</p>
+                    </div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-header">
+                        <span class="solution-number">②</span>
+                        <h3 class="solution-title">
+                            【代用提案】<br>
+                            「ない」は、家にあるもので。</h3>
+                    </div>
+                    <div class="solution-visual">
+                        <img src="images/sec02_02.jpg" alt="食材の代用提案イメージ">
+                    </div>
+                    <div class="solution-body">
+                        <p>牛肉がなければ豚肉で。ピーマンがなければ小松菜で。AIがレシピを「あなたの冷蔵庫仕様」に書き換えます。</p>
+                    </div>
+                </div>
+
+                <div class="solution-item">
+                    <div class="solution-header">
+                        <span class="solution-number">③</span>
+                        <h3 class="solution-title">
+                            【負荷の可視化】<br>
+                            「今の体力」で選べる。</h3>
+                    </div>
+                    <div class="solution-visual">
+                        <img src="images/sec02_03.jpg" alt="調理負荷のアイコン表示イメージ">
+                    </div>
+                    <div class="solution-body">
+                        <p>フライパン1つ、包丁いらず。<br>
+                            洗い物の少なさをアイコンで表示。
+                            限界な日は、一番ラクなやつを選んで。</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p>基本的な操作方法はこちら</p>
+                    <!-- **ここにYouTubeを貼り付ける** -->
+                    <video src=""></video>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section-experience">
+            <div class="experience-container">
+
+                <div class="experience-header">
+                    <h2 class="experience-title">浮いた20分で、子供と笑う。</h2>
+                </div>
+
+                <div class="experience-copy">
+                    <p>
+                        スーパーに寄るのをやめる。<br>
+                        献立に悩むのをやめる。<br>
+                        そうして生まれた時間は、<br>
+                        今日あったことを子供と話す、<br>
+                        何にも代えがたい「余白」になります。
+                    </p>
+                </div>
+
+                <div class="experience-gallery">
+                    <div class="gallery-row-top">
+                        <div class="gallery-item img-upper-left">
+                            <img src="images/sec03_01.png" alt="スーパーに寄るのをやめたイメージ1">
+                        </div>
+                        <div class="gallery-item img-upper-right">
+                            <img src="images/sec03_02.png" alt="献立に悩むのをやめたイメージ2">
+                        </div>
+                    </div>
+
+                    <div class="gallery-row-bottom">
+                        <div class="gallery-item img-lower-full">
+                            <img src="images/sec03_03.png" alt="家族の団らんのイメージ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+        <section>
+            <div>
+                <img src="images/sec04_letter.jpg" alt="アルモンデからの手紙イメージ">
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="site-footer">
+        
+        <div class="footer-cta">
+            <div class="cta-container">
+                
+                <div class="cta-hero-text">
+                    <span class="plus-symbol">+</span>20min
+                </div>
+
+                <p class="cta-stats">
+                    毎日 20分。1ヶ月で 10時間。
+                </p>
+
+                <p class="cta-message">
+                    献立に悩む「空白」を<br>
+                    子供と笑う「余白」に<br>
+                    書き換える。
+                </p>
+
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <div class="info-container">
+
+                <ul class="footer-nav">
+                    <li><a href="company.html">会社情報</a></li>
+                    <li><a href="terms.html">利用規約</a></li>
+                </ul>
+
+                <p class="copyright">&copy; Arumonde</p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

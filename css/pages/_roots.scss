@@ -1,0 +1,9 @@
+@use "../global/variables" as *;
+
+body {
+    font-family: "LINE Seed JP", sans-serif;
+    font-weight: 400;
+    background-color: $baseColor;
+}
+
+
