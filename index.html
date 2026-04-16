@@ -19,9 +19,17 @@
     </button> -->
 
     <header>
-        <button type="button" class="hamburger-btn" id="js-hamburger-btn" aria-label="メニュー開閉">
-        <span></span>
-        </button>
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="ブランドロゴ">
+                </a>
+            </div>
+
+            <button type="button" class="hamburger-btn" id="js-hamburger-btn">
+                <span></span>
+            </button>
+        </div>
 
         <nav id="hamburger-menu">
             <div class="hamburger-content">
@@ -52,15 +60,27 @@
         </nav> 
     </header>
 
-    <!-- //メイン TOP画像 -->
-    <div id="mainContents">
-        <div class="TOP"></div>
-        <!-- <div class="rightContents"></div> -->
-        <p>献立の悩み、AIに『全部丸投げ』</p>
-    </div>
-
 
     <main>
+        <section id="hero" class="section-hero">
+        <div class="hero-container">
+            <div class="hero-visual">
+                <img src="images/TOP.jpg" alt="アルモンデ：考えるのを、やめました。作るのは、あるもんで。">
+                <h3>献立の悩み、AIに『全部丸投げ』</h3>
+            </div>
+        </div>
+        </section>
+
+            <div class="download-container">
+                <ul>
+                    <li><a href="#"><img src="images/Download_AppStore.svg" alt="Appのダウンロードボタン"></a></li>
+                    <li><a href="#"><img src="images/Download_GooglePlay.svg" alt="GooglePlayのダウンロードボタン"></a></li>
+                    <li><a href="#"><img src="images/share.png" alt="shareボタンのアイコン"></a></li>
+                </ul>
+            </div>
+
+
+    <!-- // セクション01 絶望編  ------------------------------------ -->
         <section id="despair" class="section-despair">
             <div class="despair-container">
                 
@@ -106,11 +126,13 @@
             </div>
         </section>
 
+    <!-- // セクション02 救済編  ------------------------------------ -->
         <section id="solutions" class="section-solutions">
             <div class="solutions-container">
 
             <h2 class="solutions-heading">
-                アルモンデが提供する3つの「丸投げ」救済術。</h2>
+                アルモンデが提供する<br>
+                3つの「丸投げ」救済術。</h2>
 
             <div class="solutions-list">
 
@@ -171,6 +193,7 @@
             </div>
         </section>
 
+    <!-- // セクション03 20分の余白  --------------------------------- -->
         <section id="experience" class="section-experience">
             <div class="experience-container">
 
@@ -207,6 +230,7 @@
             </div>
         </section> 
 
+    <!-- // セクション04 手紙  ------------------------------------ -->
         <section>
             <div>
                 <img src="images/sec04_letter.jpg" alt="アルモンデからの手紙イメージ">
@@ -216,7 +240,6 @@
 
 
     <footer class="site-footer">
-        
         <div class="footer-cta">
             <div class="cta-container">
                 
@@ -233,7 +256,6 @@
                     子供と笑う「余白」に<br>
                     書き換える。
                 </p>
-
             </div>
         </div>
 
