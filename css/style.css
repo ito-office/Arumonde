@@ -287,14 +287,14 @@ body {
   background-color: #F9F7F2;
 }
 
-/* --- 1. 基本設定（メインコンテンツの埋もれ防止） --- */
+/* --- 1. 基本設定 --- */
 body {
   margin: 0;
   padding: 0;
 }
 
 main {
-  padding-top: 55px; /* 固定ヘッダーの高さ分だけ下に下げる */
+  padding-top: 55px; /* 固定ヘッダーの高さ分 */
 }
 
 /* --- 2. 固定ヘッダーバー --- */
@@ -305,41 +305,46 @@ main {
   width: 100%;
   height: 55px;
   background-color: #8DA390;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* 軽い影 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   z-index: 1000;
 }
 
 .header-inner {
-  max-width: 375px; /* スマホ幅375pxを基準にする */
+  max-width: 375px; /* スマホ基準 */
+  margin: 0 auto;
   height: 100%;
-  padding: 0 8px; /* 左右の余白 */
+  padding: 0 8px;
   display: flex;
-  justify-content: space-between; /* ロゴとボタンを左右に飛ばす */
-  align-items: center; /* 上下中央揃え */
-  background-color: #8DA390;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #8DA390; /* ロゴの背景が白く見える場合はここをチェック */
 }
 
-/* ロゴのサイズ */
+/* ロゴのサイズ調整 */
 .header-logo img {
-  height: 30px; /* 55pxに収まるよう調整 */
+  height: 35px; /* 少し大きく調整 */
   width: auto;
   display: block;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
-/* --- 3. ハンバーガーボタン（JSのis-activeで変化） --- */
+/* --- 3. ハンバーガーボタン（三本線の位置修正済み） --- */
 .hamburger-btn {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background: transparent;
+  background-color: #F9F7F2;
   border: none;
   cursor: pointer;
   width: 45px;
   height: 45px;
-  background-color: #F9F7F2;
-  border-radius: 28px;
+  border-radius: 50%; /* 正円に */
   position: relative;
-  z-index: 1100; /* メニューより上に */
+  z-index: 1100; /* メニューより上に配置 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 三本線の共通設定 */
@@ -352,22 +357,28 @@ main {
   width: 24px;
   background-color: #333;
   position: absolute;
-  left: 10px;
-  transition: all 0.3s ease; /* アニメーション速度 */
+  transition: all 0.3s ease;
 }
 
-/* 線を上下に配置 */
+/* 線の位置を完全に中央へ揃える */
+.hamburger-btn span {
+  /* 親のflex(center)により、このspanはボタンの真ん中に配置されます */
+  position: relative;
+}
+
 .hamburger-btn span::before {
   top: -8px;
+  left: 0;
 }
 
 .hamburger-btn span::after {
   top: 8px;
+  left: 0;
 }
 
-/* 【JSで付与されるクラス】ボタンが×になる設定 */
+/* 【JSで付与】×印への変化 */
 .hamburger-btn.is-active span {
-  background-color: transparent; /* 真ん中の線を消す */
+  background-color: transparent;
 }
 
 .hamburger-btn.is-active span::before {
@@ -380,83 +391,79 @@ main {
   top: 0;
 }
 
-/* --- 4. スライドメニュー本体 --- */
+/* --- 4. スライドメニュー（上から降ってくる仕様） --- */
 #hamburger-menu {
   position: fixed;
-  top: 0; /* 55pxからではなく0からにすると全画面感が出る */
-  right: -100%; /* 初期状態は画面の外（右） */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: rgba(255, 255, 255, 0.8);
+  /* 【追加】後ろのコンテンツを少しぼかすと高級感が出ます（グラスモーフィズム） */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari対策 */
   z-index: 1050;
-  transition: right 0.4s ease; /* スライドの速さ */
-  padding-top: 80px; /* ボタンと被らないように上部を開ける */
+  /* 上へ隠す設定 */
+  transform: translateY(-100%);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  padding-top: 80px;
   overflow-y: auto;
-}
-
-/* 【JSで付与されるクラス】メニューが右から出てくる */
-#hamburger-menu.is-active {
-  right: 0;
-}
-
-/* --- 5. メニュー内部のレイアウト --- */
-.hamburger-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
-/* リンク一覧 */
-.hamburger-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 30px 0;
+/* 【JSで付与】表示状態 */
+#hamburger-menu.is-active {
+  transform: translateY(0);
+}
+
+/* --- 5. メニュー内部の装飾 --- */
+.hamburger-content {
+  width: 100%;
   text-align: center;
 }
 
-.hamburger-content ul li {
-  margin-bottom: 20px;
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 90px 0;
 }
 
-.hamburger-content ul li a {
+.menu-list li {
+  margin-bottom: 25px;
+}
+
+.menu-list li a {
   text-decoration: none;
   color: #333;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px; /* 少し見やすく */
+  font-weight: 700;
 }
 
-/* ダウンロードボタン画像 */
+/* ダウンロードエリア */
+.download-container {
+  margin-bottom: 40px;
+}
+
 .download-container ul {
-  display: flex; /* 横並びにする */
-  list-style: none; /* メニューの「・」を消す */
-  padding: 0; /* 余計な余白をリセット */
-  margin: 0; /* 余計な余白をリセット */
-  justify-content: center; /* 中央寄せ（左寄せなら flex-start） */
-  align-items: center; /* 垂直方向の真ん中を揃える */
-  gap: 12px; /* ボタン同士の隙間（お好みで調整） */
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 15px;
+  justify-content: center;
 }
 
 .download-container img {
+  height: 40px;
   width: auto;
-  height: 45px;
 }
 
-/* ロゴ */
-.menu-logo {
-  margin-top: 40px;
-  padding-bottom: 50px;
-}
-
+/* メニュー内のロゴ */
 .menu-logo img {
-  width: 120px;
+  width: 140px;
   height: auto;
-}
-
-.hero-visual h3 {
-  font-weight: 700;
-  text-align: center;
-  margin: 24px 0;
+  margin-bottom: 50px;
 }
 
 h2 {
