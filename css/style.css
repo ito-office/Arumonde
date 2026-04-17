@@ -442,10 +442,6 @@ main {
 }
 
 /* ダウンロードエリア */
-.download-container {
-  margin-bottom: 40px;
-}
-
 .download-container ul {
   display: flex;
   list-style: none;
@@ -464,6 +460,11 @@ main {
   width: 140px;
   height: auto;
   margin-bottom: 50px;
+}
+
+.hero-visual h3 {
+  margin: 24px 0 154px 0;
+  text-align: center;
 }
 
 h2 {
@@ -489,4 +490,297 @@ h2 {
 
 .scene-body p {
   text-align: center;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.section-solutions {
+  background-color: #F9F7F2;
+  padding: 100px 0;
+}
+
+.solutions-heading {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+/* --- カードが並ぶリスト --- */
+.solutions-list {
+  display: flex;
+  flex-direction: column; /* スマホ向けに縦並び */
+  align-items: center;
+  gap: 47px; /* カード同士の隙間 */
+}
+
+/* --- カード1枚の設定（w:343 h:420） --- */
+.solution-item {
+  position: relative; /* 番号の基準点にする */
+  width: 343px;
+  height: 420px;
+  background-color: #fff;
+  padding: 24px;
+  box-sizing: border-box; /* パディングをサイズに含める */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 軽い影で浮かせる */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- ①、②、③ の番号部分 (w:70 h:61) --- */
+/* --- タイトル部分（番号が浮いた分、位置を調整） --- */
+.solution-header {
+  width: 100%;
+  padding-top: 10px; /* 番号と重なりすぎないように調整 */
+}
+.solution-header .solution-title {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  margin: 0;
+}
+
+.solution-number {
+  position: absolute;
+  top: -30.5px; /* 高さ61pxの半分（約30px）だけ上にずらす */
+  left: 2px; /* 左端から2pxの位置 */
+  height: 61px;
+  color: #FFA891; /* アクセントカラーに変更 */
+  font-size: 60px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* --- 画像部分 (w:270 h:274) --- */
+/* --- 画像サイズを強制固定 (w:270 h:274) --- */
+.solution-visual {
+  /* ここでサイズをガチガチに固定します */
+  width: 270px !important;
+  min-width: 270px;
+  height: 274px !important;
+  min-height: 274px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.solution-visual img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* 比率を保ちつつ枠を埋める */
+}
+
+/* --- 説明文 --- */
+.solution-body {
+  width: 100%;
+}
+.solution-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: #666;
+}
+
+/* YouTubeプレースホルダー */
+.video-section {
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  align-items: center; /* ★これで水平方向の真ん中に寄る */
+  text-align: center;
+  width: 100%;
+  background-color: #F9F7F2; /* 背景を統一 */
+}
+
+.video-section p {
+  margin: 0 0 16px 0; /* 下にだけ余白を作る */
+  font-size: 20px;
+}
+
+/* 動画本体の設定 */
+.video-section video {
+  width: 80%; /* スマホの両端に少し余裕を持たせる */
+  max-width: 343px; /* カードの横幅と同じにする */
+  height: auto; /* 比率を維持 */
+  border-radius: 16px; /* 角丸にして「救済カード」とデザインを合わせる */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 軽い影で高級感を出す */
+  outline: none;
+}
+
+.section-experience {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.experience-title {
+  font-size: 24px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.experience-copy {
+  margin-bottom: 40px;
+}
+.experience-copy p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* --- ギャラリー全体の枠 --- */
+.experience-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px; /* 上下の行の隙間 */
+}
+
+/* --- 上の段：2枚並び --- */
+.gallery-row-top {
+  display: flex;
+  justify-content: center;
+  gap: 17px; /* 左右の画像の隙間 (163+17+163 = 343px) */
+}
+.gallery-row-top .gallery-item {
+  width: 163px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gallery-row-top .gallery-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* サイズに合わせて切り抜き */
+}
+
+/* --- 下の段：1枚どっしり --- */
+.gallery-row-bottom .gallery-item {
+  width: 343px;
+  height: 248px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gallery-row-bottom .gallery-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.site-footer {
+  width: 100%;
+}
+
+/* --- 最後の力強いメッセージ部分 (h:600) --- */
+.footer-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px; /* スマホ画面ほぼいっぱいの高さ */
+  background-color: #8DA390; /* メインカラー背景 */
+  color: #fff; /* 文字は白 */
+  text-align: center;
+  padding: 0 20px;
+}
+
+.cta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* 要素同士の隙間 */
+}
+
+/* +20min (96px) */
+.cta-hero-text {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.cta-hero-text .plus-symbol {
+  font-size: 0.6em; /* +は少し小さくするとバランスが良いです */
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* 毎日20分... (20px) */
+.cta-stats {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* 献立に悩む... (24px) */
+.cta-message {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- コピーライトなどの情報部分 --- */
+.footer-info {
+  background-color: #F9F7F2; /* ベースカラー背景 */
+  padding: 8px 20px 80px; /* 固定バーが被るので下を多めに */
+  text-align: center;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 72px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 16px;
+}
+.footer-nav a {
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #999;
+}
+
+/* --- 下部 固定ダウンロードバーの設定 --- */
+.download-container.is-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #F9F7F2;
+  backdrop-filter: blur(8px); /* メニューと同じぼかしを入れると統一感が出ます */
+  padding: 12px 0;
+  z-index: 900; /* ヘッダー(1000)より低く、コンテンツより高く */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); /* 上方向に軽い影 */
+  /* --- ここを追加：初期状態は下に隠して透明に --- */
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease; /* ふんわり出すための設定 */
+  /* --- 【重要】表示用のクラス --- */
+}
+.download-container.is-fixed.is-show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+.download-container.is-fixed ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.download-container.is-fixed img {
+  height: 40px; /* スマホで見やすいサイズ */
+  width: auto;
+}
+
+/* 最後のコンテンツが隠れないように余白を作る *//*# sourceMappingURL=style.css.map */

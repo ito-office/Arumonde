@@ -1,4 +1,10 @@
 @use "../global/variables" as *;
+// ファーストビュ -----------------
+.hero-visual h3{
+    margin: 24px 0 154px 0;
+    text-align: center;
+}
+
 
 // セクション01 絶望編　-----------
 h2{
@@ -26,9 +32,198 @@ h2{
 
 
 // セクション02 救済編　-----------
+.section-solutions {
+    background-color: $baseColor; // 背景に色を敷いて白カードを際立たせる
+    padding: 100px 0; // 上に番号がはみ出すので、少し余白を多めに
+}
 
+.solutions-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+/* --- カードが並ぶリスト --- */
+.solutions-list {
+    display: flex;
+    flex-direction: column; /* スマホ向けに縦並び */
+    align-items: center;
+    gap: 47px; /* カード同士の隙間 */
+}
+
+/* --- カード1枚の設定（w:343 h:420） --- */
+.solution-item {
+    position: relative; /* 番号の基準点にする */
+    width: 343px;
+    height: 420px;
+    background-color: #fff;
+    // border-radius: 24px; /* 角を丸くして優しさを出す */
+    padding: 24px;
+    box-sizing: border-box; /* パディングをサイズに含める */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 軽い影で浮かせる */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ①、②、③ の番号部分 (w:70 h:61) --- */
+/* --- タイトル部分（番号が浮いた分、位置を調整） --- */
+.solution-header {
+    width: 100%;
+    padding-top: 10px; /* 番号と重なりすぎないように調整 */
+
+    .solution-title {
+        font-size: 18px;
+        line-height: 1.4;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+.solution-number {
+    position: absolute;
+    top: calc(61px / -2); /* 高さ61pxの半分（約30px）だけ上にずらす */
+    left: 2px;           /* 左端から2pxの位置 */
+    
+    height: 61px;
+    color: $accentColor; /* アクセントカラーに変更 */
+    font-size: 60px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border-radius: 16px;
+    z-index: 10;
+}
+
+
+/* --- 画像部分 (w:270 h:274) --- */
+/* --- 画像サイズを強制固定 (w:270 h:274) --- */
+.solution-visual {
+    /* ここでサイズをガチガチに固定します */
+    width: 270px !important;
+    min-width: 270px;
+    height: 274px !important;
+    min-height: 274px;
+    
+    margin-bottom: 16px;
+    border-radius: 16px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 比率を保ちつつ枠を埋める */
+    }
+}
+
+/* --- 説明文 --- */
+.solution-body {
+    width: 100%;
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+        color: #666;
+    }
+}
+
+/* YouTubeプレースホルダー */
+.video-section {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    align-items: center;    /* ★これで水平方向の真ん中に寄る */
+    text-align: center;
+    width: 100%;
+    // padding: 60px 0;
+    background-color: $baseColor; /* 背景を統一 */
+}
+
+.video-section p {
+    margin: 0 0 16px 0;    /* 下にだけ余白を作る */
+    font-size: 20px;
+    // font-weight: 700;
+}
+
+/* 動画本体の設定 */
+.video-section video {
+    width: 80%;            /* スマホの両端に少し余裕を持たせる */
+    max-width: 343px;       /* カードの横幅と同じにする */
+    height: auto;           /* 比率を維持 */
+    border-radius: 16px;    /* 角丸にして「救済カード」とデザインを合わせる */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 軽い影で高級感を出す */
+    outline: none;
+}
 
 // セクション03 20分の余白　-----------
+
+.section-experience {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.experience-title {
+    font-size: 24px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+.experience-copy {
+    margin-bottom: 40px;
+    p {
+        font-size: 15px;
+        line-height: 1.8;
+        color: #666;
+    }
+}
+
+/* --- ギャラリー全体の枠 --- */
+.experience-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px; /* 上下の行の隙間 */
+}
+
+/* --- 上の段：2枚並び --- */
+.gallery-row-top {
+    display: flex;
+    justify-content: center;
+    gap: 17px; /* 左右の画像の隙間 (163+17+163 = 343px) */
+
+    .gallery-item {
+        width: 163px;
+        height: 200px;
+        border-radius: 16px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* サイズに合わせて切り抜き */
+        }
+    }
+}
+
+/* --- 下の段：1枚どっしり --- */
+.gallery-row-bottom {
+    .gallery-item {
+        width: 343px;
+        height: 248px;
+        border-radius: 16px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
 
 
 // セクション04 手紙　-----------
