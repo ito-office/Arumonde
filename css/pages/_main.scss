@@ -53,51 +53,82 @@ h2{
 }
 
 /* --- カード1枚の設定（w:343 h:420） --- */
+/* --- カード1枚の設定（高さを固定から最小高さへ） --- */
 .solution-item {
-    position: relative; /* 番号の基準点にする */
+    position: relative;
     width: 343px;
-    height: 420px;
+    /* height: 420px; ← 削除：中身に応じて伸びるようにする */
+    min-height: 440px; /* 最小の高さだけ決めておく */
     background-color: #fff;
-    // border-radius: 24px; /* 角を丸くして優しさを出す */
-    padding: 24px;
-    box-sizing: border-box; /* パディングをサイズに含める */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 軽い影で浮かせる */
+    border-radius: 24px; /* 角丸を復活させるとより「カード」らしくなります */
+    padding: 36px 24px 8px; /* 上の余白を多めにして番号との被りを調整 */
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* カード内の要素を均等に配置したい場合はこれ */
+    justify-content: flex-start; 
 }
 
-/* --- ①、②、③ の番号部分 (w:70 h:61) --- */
-/* --- タイトル部分（番号が浮いた分、位置を調整） --- */
+/* --- タイトル部分 --- */
 .solution-header {
     width: 100%;
-    padding-top: 10px; /* 番号と重なりすぎないように調整 */
+    margin-bottom: 12px;
 
     .solution-title {
         font-size: 18px;
         line-height: 1.4;
         font-weight: 700;
         margin: 0;
+        color: #333;
     }
 }
 
-.solution-number {
-    position: absolute;
-    top: calc(61px / -2); /* 高さ61pxの半分（約30px）だけ上にずらす */
-    left: 2px;           /* 左端から2pxの位置 */
-    
-    height: 61px;
-    color: $accentColor; /* アクセントカラーに変更 */
-    font-size: 60px;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    // border-radius: 16px;
-    z-index: 10;
+/* --- 説明文（ここを可変にする） --- */
+.solution-body {
+    width: 100%;
+    margin-bottom: 8px;
+    flex-grow: 1; /* ★重要：タイトルが短くても、ここでスペースを調整して画像位置を揃える */
+
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 0;
+        color: #666;
+    }
 }
 
+/* --- 画像部分 (サイズを少し調整して収まりを良くする) --- */
+.solution-visual {
+    width: 270px;
+    height: 200px; /* ★高さを少し抑えると文字領域が確保しやすくなります */
+    margin-top: auto; /* 文字が少なくても一番下に配置される */
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0; /* 画像が潰れないように固定 */
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* --- ①、②、③ の番号部分 --- */
+.solution-number {
+    position: absolute;
+    top: -25px; /* カードの淵に引っ掛ける */
+    left: 10px;
+    height: 56px;
+    color: $accentColor;
+    font-size: 50px; /* 少しサイズを調整 */
+    font-weight: 800;
+    z-index: 10;
+    // font-style: italic; /* 少し斜体にすると躍動感が出ます */
+    line-height: 1;
+}
 
 /* --- 画像部分 (w:270 h:274) --- */
 /* --- 画像サイズを強制固定 (w:270 h:274) --- */
@@ -137,12 +168,13 @@ h2{
     align-items: center;    /* ★これで水平方向の真ん中に寄る */
     text-align: center;
     width: 100%;
-    // padding: 60px 0;
+    padding: 32px 0;
+    gap: 16px;
     background-color: $baseColor; /* 背景を統一 */
 }
 
 .video-section p {
-    margin: 0 0 16px 0;    /* 下にだけ余白を作る */
+    // margin: 0 0 16px 0;    /* 下にだけ余白を作る */
     font-size: 20px;
     // font-weight: 700;
 }
@@ -227,5 +259,7 @@ h2{
 
 
 // セクション04 手紙　-----------
-
+.letter{
+    margin-bottom: 80px;
+}
 

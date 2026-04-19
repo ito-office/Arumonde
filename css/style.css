@@ -513,44 +513,77 @@ h2 {
 }
 
 /* --- カード1枚の設定（w:343 h:420） --- */
+/* --- カード1枚の設定（高さを固定から最小高さへ） --- */
 .solution-item {
-  position: relative; /* 番号の基準点にする */
+  position: relative;
   width: 343px;
-  height: 420px;
+  /* height: 420px; ← 削除：中身に応じて伸びるようにする */
+  min-height: 440px; /* 最小の高さだけ決めておく */
   background-color: #fff;
-  padding: 24px;
-  box-sizing: border-box; /* パディングをサイズに含める */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 軽い影で浮かせる */
+  border-radius: 24px; /* 角丸を復活させるとより「カード」らしくなります */
+  padding: 36px 24px 8px; /* 上の余白を多めにして番号との被りを調整 */
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* カード内の要素を均等に配置したい場合はこれ */
+  justify-content: flex-start;
 }
 
-/* --- ①、②、③ の番号部分 (w:70 h:61) --- */
-/* --- タイトル部分（番号が浮いた分、位置を調整） --- */
+/* --- タイトル部分 --- */
 .solution-header {
   width: 100%;
-  padding-top: 10px; /* 番号と重なりすぎないように調整 */
+  margin-bottom: 12px;
 }
 .solution-header .solution-title {
   font-size: 18px;
   line-height: 1.4;
   font-weight: 700;
   margin: 0;
+  color: #333;
 }
 
+/* --- 説明文（ここを可変にする） --- */
+.solution-body {
+  width: 100%;
+  margin-bottom: 8px;
+  flex-grow: 1; /* ★重要：タイトルが短くても、ここでスペースを調整して画像位置を揃える */
+}
+.solution-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: #666;
+}
+
+/* --- 画像部分 (サイズを少し調整して収まりを良くする) --- */
+.solution-visual {
+  width: 270px;
+  height: 200px; /* ★高さを少し抑えると文字領域が確保しやすくなります */
+  margin-top: auto; /* 文字が少なくても一番下に配置される */
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0; /* 画像が潰れないように固定 */
+}
+.solution-visual img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* --- ①、②、③ の番号部分 --- */
 .solution-number {
   position: absolute;
-  top: -30.5px; /* 高さ61pxの半分（約30px）だけ上にずらす */
-  left: 2px; /* 左端から2pxの位置 */
-  height: 61px;
-  color: #FFA891; /* アクセントカラーに変更 */
-  font-size: 60px;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: -25px; /* カードの淵に引っ掛ける */
+  left: 10px;
+  height: 56px;
+  color: #FFA891;
+  font-size: 50px; /* 少しサイズを調整 */
+  font-weight: 800;
   z-index: 10;
+  line-height: 1;
 }
 
 /* --- 画像部分 (w:270 h:274) --- */
@@ -590,11 +623,12 @@ h2 {
   align-items: center; /* ★これで水平方向の真ん中に寄る */
   text-align: center;
   width: 100%;
+  padding: 32px 0;
+  gap: 16px;
   background-color: #F9F7F2; /* 背景を統一 */
 }
 
 .video-section p {
-  margin: 0 0 16px 0; /* 下にだけ余白を作る */
   font-size: 20px;
 }
 
@@ -670,26 +704,32 @@ h2 {
      object-fit: cover;
 }
 
+.letter {
+  margin-bottom: 80px;
+}
+
 .site-footer {
   width: 100%;
+  background-color: #8DA390; /* フッター全体（画像部分含む）の背景色を固定 */
 }
 
 /* --- 最後の力強いメッセージ部分 (h:600) --- */
 .footer-cta {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 600px; /* スマホ画面ほぼいっぱいの高さ */
-  background-color: #8DA390; /* メインカラー背景 */
+  align-items: flex-start;
+  height: 400px; /* スマホ画面ほぼいっぱいの高さ */
   color: #fff; /* 文字は白 */
   text-align: center;
-  padding: 0 20px;
+  padding: 40px 20px 0; /* --- 修正：TOP余白を32pxに設定 --- */
+  position: relative; /* 子要素の配置基準 */
 }
 
 .cta-container {
   display: flex;
   flex-direction: column;
-  gap: 32px; /* 要素同士の隙間 */
+  gap: 24px; /* 要素同士の隙間 */
+  /* width: 100%; <- 必要に応じて追加 */
 }
 
 /* +20min (96px) */
@@ -720,11 +760,23 @@ h2 {
   margin: 0;
 }
 
+/* --- 画像配置部分のスタイルを追加 --- */
+.footer-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-left: auto;
+  /* padding: 0;  必要に応じて余白を調整 */
+}
+
 /* --- コピーライトなどの情報部分 --- */
 .footer-info {
   background-color: #F9F7F2; /* ベースカラー背景 */
-  padding: 8px 20px 80px; /* 固定バーが被るので下を多めに */
+  padding: 16px 20px 80px; /* 固定バーが被るので下を多めに */
   text-align: center;
+  position: relative; /* z-indexのため */
+  z-index: 10; /* 画像より上に配置 */
 }
 
 .footer-nav {
@@ -739,6 +791,14 @@ h2 {
   text-decoration: none;
   color: #666;
   font-size: 14px;
+  transition: all 0.3s ease; /* --- 追加：アニメーション --- */
+}
+.footer-nav {
+  /* --- 追加：ホバー時のエフェクト --- */
+}
+.footer-nav a:hover {
+  opacity: 0.7; /* 少し透明にする */
+  text-decoration: underline; /* 下線を表示 */
 }
 
 .copyright {

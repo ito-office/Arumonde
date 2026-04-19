@@ -1,0 +1,49 @@
+【動画生成のプロンプト】
+
+これまでのプロンプトは構成としては非常に優れていますが、AI（特に動画生成モデル）が日本語を「中国語」として誤認したり、UIを勝手に書き換えたりするのは、現在のAI技術における**「非英語圏テキストへのバイアス」**という大きな壁が原因です。
+
+AIは学習データの多くを占める言語（英語や中国語）を「一般的」だと判断し、曖昧な部分をそれらの言語で補完（ハルシネーション）してしまう性質があります。これを防ぎ、100%理想通りの動画を作るための**「プロの解決策」**を2つ提案します。
+
+解決策1：【最も確実】映像とテロップを分ける（プロの制作手法）
+プロのクリエイターがAI動画を作る際、最も信頼されている方法は**「AIに文字を書かせない」**ことです。
+
+ステップ1（AI）： 以下の「映像専用プロンプト」を使い、文字なしの綺麗な画面遷移動画だけを生成させます。
+
+ステップ2（手動）： 出来上がった動画を「CapCut」や「Canva」などの編集ツールに入れ、自分で日本語のテロップを乗せます。
+
+メリット： 文字化けが0になり、フォントも「Arumonde」に合う自由なものが選べます。
+
+【映像専用】修正プロンプト（英語）
+Image-to-Video (I2V) Workflow: Use provided images (sec02_01.jpg, sec02_02.jpg, sec02_03.jpg) as anchors.
+Sequence: Smoothly transition from sec02_01.jpg as the start frame to sec02_03.jpg as the end frame.
+Constraint: The smartphone UI must remain 100% static and identical to the reference images. Do not generate or modify any text on the screen.
+Action: Subtle zoom-in on the smartphone screen only. The camera remains stationary.
+
+解決策2：【AIで完結させたい場合】プロンプトの「強度」を上げる
+どうしても1つのプロンプトで完結させたい場合は、AIが「推測」する余地を徹底的に潰す必要があります。
+
+修正ポイント
+「タイムライン指定」を使う： 「○秒後に何が起きるか」を秒数で指定することで、AIの迷いを減らします。
+
+ポジティブな命令を優先： 「〜しないで」という否定形より、「〜の状態を維持せよ」という肯定形の方がAIには伝わりやすいです。
+
+
+【改良版】オールインワン・プロンプト
+### MISSION: FAITHFUL APP WALKTHROUGH
+Anchor visuals to sec02_01.jpg (Start Frame) and sec02_03.jpg (End Frame). 
+The smartphone UI must be identical to the source images at all times. 
+
+### TIMELINE & JAPANESE OVERLAYS
+00:00 - 00:02: Focus on sec02_01.jpg. 
+- Static Overlay (Japanese): 【入力】 冷蔵庫にあるものを「丸投げ入力」
+00:02 - 00:04: Smooth slide transition to sec02_02.jpg. 
+- Static Overlay (Japanese): 【提案】 80％の一致度で「今すぐ作れる」が見つかる
+- Static Overlay (Japanese): 【救済】 足りない材料はAIが「代用提案」
+00:04 - 00:06: Final zoom on sec02_03.jpg. 
+- Static Overlay (Japanese): 【完了】 あとは作るだけ。献立の悩み、終了！
+
+### ABSOLUTE CONSTRAINTS
+- TEXT INTEGRITY: Strictly render the provided Japanese characters. Do not guess or hallucinate any other scripts (No Chinese, No garbled text). 
+- UI STABILITY: The phone screen DNA must not mutate. 
+- FONT: Use a bold, legible sans-serif Japanese font.
+
