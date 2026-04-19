@@ -1,40 +1,91 @@
 @use "../global/variables" as *;
-// ファーストビュ -----------------
-.hero-visual h3{
-    margin: 24px 0 154px 0;
+
+/* ==========================================================================
+   1. ヒーローセクション（ファーストビュー）
+   ========================================================================== */
+.hero-visual {
     text-align: center;
+    padding: 15px 16px 50px; /* 上の余白を詰め、下のセクションとの距離を確保 */
+
+    h3 {
+        display: inline-block;
+        position: relative;
+        margin: 20px 0 40px;
+        color: $main_textColor;
+        font-size: 20px;
+        font-weight: 500;
+        // letter-spacing: 0.1em;
+        line-height: 1.6;
+    }
 }
 
+.hero-visual img {
+    display: block;      /* inlineだと微妙に隙間ができることがあるため */
+    margin: 0 auto;      /* 左右中央寄せ */
+    width: 100%;
+    max-width: 343px;    /* 画像が大きくなりすぎないよう制限 */
+    height: auto;
+}
 
-// セクション01 絶望編　-----------
-h2{
+// /* 「無料で」の強調 */
+// .text-accent {
+//     color: $accentColor;
+//     font-weight: 700;
+//     font-size: 1.1em;
+//     margin: 0 2px;
+// }
+
+/* ==========================================================================
+   2. 共通セクション設定
+   ========================================================================== */
+h2 {
     font-size: 24px;
     text-align: center;
 }
 
-#despair,
-#solutions,
-#experience{
-    margin-top: 80px;
+.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
-.despair-heading{
+
+/* ==========================================================================
+   3. 絶望編（セクション01）
+   ========================================================================== */
+.section-despair {
+    background-color: #fff;
+    padding: 100px 0;
+}
+
+.despair-heading {
     display: flex;
     justify-content: center;
     padding: 16px;
 }
-.scene-title{
-    margin-top: 24px;
+
+.despair-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+
+    .scene-title {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .scene-body p {
+        text-align: center;
+    }
 }
-.scene-body p{
-    text-align: center;
 
-}
-
-
-// セクション02 救済編　-----------
+/* ==========================================================================
+   4. 救済編（セクション02）
+   ========================================================================== */
 .section-solutions {
-    background-color: $baseColor; // 背景に色を敷いて白カードを際立たせる
-    padding: 100px 0; // 上に番号がはみ出すので、少し余白を多めに
+    background-color: $baseColor;
+    padding: 100px 0;
 }
 
 .solutions-heading {
@@ -44,207 +95,69 @@ h2{
     line-height: 1.6;
 }
 
-/* --- カードが並ぶリスト --- */
 .solutions-list {
     display: flex;
-    flex-direction: column; /* スマホ向けに縦並び */
+    flex-direction: column;
     align-items: center;
-    gap: 47px; /* カード同士の隙間 */
+    gap: 47px;
 }
 
-/* --- カード1枚の設定（w:343 h:420） --- */
-/* --- カード1枚の設定（高さを固定から最小高さへ） --- */
 .solution-item {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 343px;
-    /* height: 420px; ← 削除：中身に応じて伸びるようにする */
-    min-height: 440px; /* 最小の高さだけ決めておく */
+    min-height: 440px;
+    padding: 36px 24px 24px;
     background-color: #fff;
-    border-radius: 24px; /* 角丸を復活させるとより「カード」らしくなります */
-    padding: 36px 24px 8px; /* 上の余白を多めにして番号との被りを調整 */
-    box-sizing: border-box;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* カード内の要素を均等に配置したい場合はこれ */
-    justify-content: flex-start; 
-}
-
-/* --- タイトル部分 --- */
-.solution-header {
-    width: 100%;
-    margin-bottom: 12px;
-
-    .solution-title {
-        font-size: 18px;
-        line-height: 1.4;
-        font-weight: 700;
-        margin: 0;
-        color: #333;
-    }
-}
-
-/* --- 説明文（ここを可変にする） --- */
-.solution-body {
-    width: 100%;
-    margin-bottom: 8px;
-    flex-grow: 1; /* ★重要：タイトルが短くても、ここでスペースを調整して画像位置を揃える */
-
-    p {
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 0;
-        color: #666;
-    }
-}
-
-/* --- 画像部分 (サイズを少し調整して収まりを良くする) --- */
-.solution-visual {
-    width: 270px;
-    height: 200px; /* ★高さを少し抑えると文字領域が確保しやすくなります */
-    margin-top: auto; /* 文字が少なくても一番下に配置される */
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0; /* 画像が潰れないように固定 */
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-/* --- ①、②、③ の番号部分 --- */
-.solution-number {
-    position: absolute;
-    top: -25px; /* カードの淵に引っ掛ける */
-    left: 10px;
-    height: 56px;
-    color: $accentColor;
-    font-size: 50px; /* 少しサイズを調整 */
-    font-weight: 800;
-    z-index: 10;
-    // font-style: italic; /* 少し斜体にすると躍動感が出ます */
-    line-height: 1;
-}
-
-/* --- 画像部分 (w:270 h:274) --- */
-/* --- 画像サイズを強制固定 (w:270 h:274) --- */
-.solution-visual {
-    /* ここでサイズをガチガチに固定します */
-    width: 270px !important;
-    min-width: 270px;
-    height: 274px !important;
-    min-height: 274px;
-    
-    margin-bottom: 16px;
     border-radius: 16px;
-    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 
-    img {
+    /* 番号部分 */
+    .solution-number {
+        position: absolute;
+        top: -25px;
+        left: 10px;
+        color: $accentColor;
+        font-size: 50px;
+        font-weight: 800;
+        line-height: 1;
+        z-index: 10;
+    }
+
+    .solution-header {
         width: 100%;
-        height: 100%;
-        object-fit: cover; /* 比率を保ちつつ枠を埋める */
-    }
-}
+        margin-bottom: 12px;
 
-/* --- 説明文 --- */
-.solution-body {
-    width: 100%;
-    p {
-        font-size: 14px;
-        line-height: 1.6;
-        margin: 0;
-        color: #666;
-    }
-}
-
-/* YouTubeプレースホルダー */
-.video-section {
-    display: flex;
-    flex-direction: column; /* 縦に並べる */
-    align-items: center;    /* ★これで水平方向の真ん中に寄る */
-    text-align: center;
-    width: 100%;
-    padding: 32px 0;
-    gap: 16px;
-    background-color: $baseColor; /* 背景を統一 */
-}
-
-.video-section p {
-    // margin: 0 0 16px 0;    /* 下にだけ余白を作る */
-    font-size: 20px;
-    // font-weight: 700;
-}
-
-/* 動画本体の設定 */
-.video-section video {
-    width: 80%;            /* スマホの両端に少し余裕を持たせる */
-    max-width: 343px;       /* カードの横幅と同じにする */
-    height: auto;           /* 比率を維持 */
-    border-radius: 16px;    /* 角丸にして「救済カード」とデザインを合わせる */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 軽い影で高級感を出す */
-    outline: none;
-}
-
-// セクション03 20分の余白　-----------
-
-.section-experience {
-    padding: 80px 0;
-    text-align: center;
-}
-
-.experience-title {
-    font-size: 24px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    color: #333;
-}
-
-.experience-copy {
-    margin-bottom: 40px;
-    p {
-        font-size: 15px;
-        line-height: 1.8;
-        color: #666;
-    }
-}
-
-/* --- ギャラリー全体の枠 --- */
-.experience-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 17px; /* 上下の行の隙間 */
-}
-
-/* --- 上の段：2枚並び --- */
-.gallery-row-top {
-    display: flex;
-    justify-content: center;
-    gap: 17px; /* 左右の画像の隙間 (163+17+163 = 343px) */
-
-    .gallery-item {
-        width: 163px;
-        height: 200px;
-        border-radius: 16px;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* サイズに合わせて切り抜き */
+        .solution-title {
+            margin: 0;
+            color: $main_textColor;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
         }
     }
-}
 
-/* --- 下の段：1枚どっしり --- */
-.gallery-row-bottom {
-    .gallery-item {
-        width: 343px;
-        height: 248px;
+    .solution-body {
+        flex-grow: 1;
+        width: 100%;
+        margin-bottom: 8px;
+
+        p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    }
+
+    /* 画像部分（サイズを統合・固定） */
+    .solution-visual {
+        width: 270px;
+        height: 274px;
+        margin-top: auto;
         border-radius: 16px;
         overflow: hidden;
 
@@ -256,10 +169,103 @@ h2{
     }
 }
 
+/* 動画セクション */
+.video-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 32px 0;
+    background-color: $baseColor;
+    text-align: center;
 
+    p {
+        font-size: 20px;
+    }
 
-// セクション04 手紙　-----------
-.letter{
-    margin-bottom: 80px;
+    video {
+        width: 80%;
+        max-width: 343px;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        outline: none;
+    }
 }
 
+/* ==========================================================================
+   5. 20分の余白（セクション03）
+   ========================================================================== */
+.section-experience {
+    padding: 80px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.experience-title {
+    margin-bottom: 24px;
+    color: #333;
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+.experience-copy {
+    margin-bottom: 40px;
+
+    p {
+        color: #666;
+        font-size: 15px;
+        line-height: 1.8;
+    }
+}
+
+.experience-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 16px;
+        background-color: #fff;
+        border: 8px solid #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    /* 上段の2枚並び */
+    .gallery-row-top {
+        display: flex;
+        justify-content: center;
+        gap: 17px;
+
+        .gallery-item {
+            width: 163px;
+            height: 200px;
+
+            /* 遊び心の傾き */
+            &:nth-child(odd) { transform: rotate(-2deg); }
+            &:nth-child(even) { transform: rotate(2deg); }
+        }
+    }
+
+    /* 下段の1枚 */
+    .gallery-row-bottom .gallery-item {
+        width: 343px;
+        height: 248px;
+    }
+}
+
+/* ==========================================================================
+   6. 手紙（セクション04）
+   ========================================================================== */
+.letter {
+    margin-bottom: 80px;
+}

@@ -1,0 +1,189 @@
+@use "../global/variables" as *; 
+
+// 会社情報  *-----------------------------------
+
+/* 会社情報の全体設定 */
+.company-page {
+    max-width: 600px; /* 読みやすい幅に制限 */
+    margin: 0 auto;
+    padding: 60px 16px;
+    color: $sub_textColor; /* 指定：#7D6B67 */
+}
+
+.page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    letter-spacing: 0.1em;
+}
+
+/* --- プロフィール部分 (16px) --- */
+.company-profile {
+    font-size: 16px; /* 指定：16px */
+    line-height: 1.8;
+    margin-bottom: 80px;
+}
+
+.profile-list {
+    border-top: 1px solid #EAE0DD; /* 上に区切り線 */
+    
+    dt {
+        font-weight: 700;
+        padding: 24px 0 8px;
+        color: $mainColor; /* 項目名はメインカラーにしてアクセントに */
+    }
+
+    dd {
+        margin-left: 0; /* デフォルトのインデントをリセット */
+        padding-bottom: 24px;
+        border-bottom: 1px solid #EAE0DD; /* 項目ごとに線を引く */
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            li {
+                position: relative;
+                padding-left: 1.2em;
+                margin-bottom: 4px;
+
+                &::before {
+                    content: "・"; /* リストの点を「・」に */
+                    position: absolute;
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+/* --- ミッション部分 --- */
+.company-mission {
+    text-align: center;
+    background-color: #F9F7F6; /* ほんのり色をつけて特別感を出す */
+    padding: 60px 0px;
+    border-radius: 24px;
+    margin-bottom: 80px;
+}
+
+.mission-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+    display: block;
+    color: $accentColor; /* ミッションラベルを目立たせる */
+}
+
+.mission-text {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+    color: $sub_textColor;
+    /* blockquoteのデフォルトの余白をリセット */
+    padding: 0;
+}
+
+.mission-description {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* --- フッター（戻るボタン） --- */
+.company-footer {
+    text-align: center;
+}
+
+.back-link {
+    a {
+        text-decoration: none;
+        color: $sub_textColor;
+        font-size: 14px;
+        padding: 12px 24px;
+        border: 1px solid #EAE0DD;
+        border-radius: 40px;
+        transition: all 0.3s ease;
+        display: inline-block;
+
+        &:hover {
+            background-color: #EAE0DD;
+            color: #fff;
+        }
+    }
+}
+
+
+// 利用規約  *-----------------------------------
+
+/* 利用規約ページ全体のコンテナ（カンパニーページと共通の幅にすると統一感が出ます） */
+.terms-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+    color: $sub_textColor; /* 指定：#7D6B67 */
+    background-color: $baseColor; /* 背景をベースカラーにして落ち着かせる */
+    line-height: 1.8;
+}
+
+/* メインタイトル */
+.terms-main-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 0.1em;
+}
+
+/* 各セクションの見出し（1. はじめに 等） */
+.terms-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 40px 0 16px;
+    padding-left: 8px;
+    border-left: 4px solid $mainColor; /* 横棒を入れて視認性をアップ */
+    // color: #333; /* 見出しは少しだけ濃くしてメリハリを */
+}
+
+/* 本文テキスト */
+.terms-text {
+    margin-bottom: 24px;
+
+    p {
+        font-size: 12px; /* 指定：12px */
+        margin: 0;
+        /* 改行コード（<br>）がある場合、少し行間を広めにとると読みやすいです */
+    }
+}
+
+/* 強調したい部分（「100点満点の料理」ではなく…） */
+.highlight {
+    display: inline-block;
+    background: linear-gradient(transparent 70%, #FDF2F0 70%); /* 薄いアクセントカラーで下線を引く */
+    font-weight: 700;
+    padding: 0 2px;
+}
+
+/* フッター（戻るボタン）- カンパニーページと共通 */
+.back-link {
+    margin-top: 80px;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: $sub_textColor;
+        font-size: 14px;
+        padding: 12px 32px;
+        border: 1px solid #EAE0DD;
+        border-radius: 40px;
+        transition: all 0.3s ease;
+        display: inline-block;
+
+        &:hover {
+            background-color: #EAE0DD;
+            color: #fff;
+        }
+    }
+}

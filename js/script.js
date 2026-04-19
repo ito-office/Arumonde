@@ -38,7 +38,7 @@ window.addEventListener('scroll', function() {
 
     // 2. タイミングを調整する数字（オフセット）
     // この数字を大きくするほど、早いタイミング（上の方）でバーが出てきます
-    const offset = 550; 
+    const offset = 770; 
 
     // 3. 判定（Heroの底まであと400pxの地点を過ぎたら表示）
     if (window.pageYOffset > (heroBottom - offset)) {
@@ -47,3 +47,35 @@ window.addEventListener('scroll', function() {
         downloadBar.classList.remove('is-show');
     }
 });
+
+// 各セクション（カードなど）をふわっと出す
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, { threshold: 0.1 });
+
+// 対象にしたい要素（カードなど）をすべて指定
+document.querySelectorAll('.despair-card, .solution-item, .experience-gallery').forEach(el => {
+    el.style.opacity = "0"; // 初期状態は透明
+    el.style.transform = "translateY(30px)"; // 少し下に下げておく
+    el.style.transition = "all 0.8s ease-out";
+    observer.observe(el);
+});
+
+// CSS側に追加
+// .fade-in { opacity: 1 !important; transform: translateY(0) !important; }
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.site-header');
+    if (window.scrollY > 50) {
+        header.classList.add('is-scrolled');
+        // JSで直接スタイルを触らず、CSSの .is-scrolled に任せる
+    } else {
+        header.classList.remove('is-scrolled');
+    }
+});
+
+

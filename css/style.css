@@ -12,7 +12,6 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   font-size: 100%;
-  max-width: 375px; /* スマホ幅375pxを基準にする */
 }
 
 *,
@@ -285,6 +284,7 @@ body {
   font-family: "LINE Seed JP", sans-serif;
   font-weight: 400;
   background-color: #F9F7F2;
+  color: #3E2A26;
 }
 
 /* --- 1. 基本設定 --- */
@@ -298,26 +298,32 @@ main {
 }
 
 /* --- 2. 固定ヘッダーバー --- */
+/* 2. ヘッダーの配置を修正 */
 .site-header {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 0; /* 一旦左詰めに */
   width: 100%;
   height: 55px;
   background-color: #8DA390;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   z-index: 1000;
+  /* スマホ版では中央寄せにする必要はありません。幅100%でOK */
 }
 
+/* ヘッダーが縮んだ時のクラス（JSで制御） */
+.site-header.is-scrolled {
+  height: 45px;
+}
+
+/* ヘッダー内部のレイアウト */
 .header-inner {
-  max-width: 375px; /* スマホ基準 */
-  margin: 0 auto;
+  width: 100%;
   height: 100%;
-  padding: 0 8px;
+  padding: 0 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #8DA390; /* ロゴの背景が白く見える場合はここをチェック */
+  box-sizing: border-box; /* パディングを含めて375pxにする */
 }
 
 /* ロゴのサイズ調整 */
@@ -329,6 +335,7 @@ main {
      object-fit: contain;
 }
 
+/* ハンバーガーメニュー自体も375px内に収める */
 /* --- 3. ハンバーガーボタン（三本線の位置修正済み） --- */
 .hamburger-btn {
   -webkit-appearance: none;
@@ -337,14 +344,23 @@ main {
   background-color: #F9F7F2;
   border: none;
   cursor: pointer;
-  width: 45px;
-  height: 45px;
+  /* ...既存の設定... */
+  flex-shrink: 0; /* 圧縮されないように固定 */
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease; /* サイズ変化も滑らかに */
   border-radius: 50%; /* 正円に */
   position: relative;
   z-index: 1100; /* メニューより上に配置 */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ヘッダーが縮んだ時のボタン微調整 */
+.site-header.is-scrolled .hamburger-btn {
+  width: 35px; /* さらに一回り小さくするとバランスが良いです */
+  height: 35px;
 }
 
 /* 三本線の共通設定 */
@@ -436,9 +452,23 @@ main {
 
 .menu-list li a {
   text-decoration: none;
-  color: #333;
-  font-size: 18px; /* 少し見やすく */
+  color: #7D6B67;
+  font-size: 18px;
   font-weight: 700;
+  transition: color 0.3s ease; /* 色の変化を滑らかに */
+  display: block; /* クリック範囲を広げる */
+  padding: 10px;
+}
+
+/* ホバー時の処理（PC） */
+@media (hover: hover) {
+  .menu-list li a:hover {
+    color: #FFA891; /* $accentColor */
+  }
+}
+/* タップした瞬間の色（スマホ） */
+.menu-list li a:active {
+  color: #FFA891;
 }
 
 /* ダウンロードエリア */
@@ -462,20 +492,50 @@ main {
   margin-bottom: 50px;
 }
 
-.hero-visual h3 {
-  margin: 24px 0 154px 0;
+/* ==========================================================================
+   1. ヒーローセクション（ファーストビュー）
+   ========================================================================== */
+.hero-visual {
   text-align: center;
+  padding: 15px 16px 50px; /* 上の余白を詰め、下のセクションとの距離を確保 */
+}
+.hero-visual h3 {
+  display: inline-block;
+  position: relative;
+  margin: 20px 0 40px;
+  color: #3E2A26;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
+.hero-visual img {
+  display: block; /* inlineだと微妙に隙間ができることがあるため */
+  margin: 0 auto; /* 左右中央寄せ */
+  width: 100%;
+  max-width: 343px; /* 画像が大きくなりすぎないよう制限 */
+  height: auto;
+}
+
+/* ==========================================================================
+   2. 共通セクション設定
+   ========================================================================== */
 h2 {
   font-size: 24px;
   text-align: center;
 }
 
-#despair,
-#solutions,
-#experience {
-  margin-top: 80px;
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ==========================================================================
+   3. 絶望編（セクション01）
+   ========================================================================== */
+.section-despair {
+  background-color: #fff;
+  padding: 100px 0;
 }
 
 .despair-heading {
@@ -484,14 +544,25 @@ h2 {
   padding: 16px;
 }
 
-.scene-title {
-  margin-top: 24px;
+.despair-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.3s ease;
 }
-
-.scene-body p {
+.despair-card .scene-title {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.despair-card .scene-body p {
   text-align: center;
 }
 
+/* ==========================================================================
+   4. 救済編（セクション02）
+   ========================================================================== */
 .section-solutions {
   background-color: #F9F7F2;
   padding: 100px 0;
@@ -504,206 +575,173 @@ h2 {
   line-height: 1.6;
 }
 
-/* --- カードが並ぶリスト --- */
 .solutions-list {
-  display: flex;
-  flex-direction: column; /* スマホ向けに縦並び */
-  align-items: center;
-  gap: 47px; /* カード同士の隙間 */
-}
-
-/* --- カード1枚の設定（w:343 h:420） --- */
-/* --- カード1枚の設定（高さを固定から最小高さへ） --- */
-.solution-item {
-  position: relative;
-  width: 343px;
-  /* height: 420px; ← 削除：中身に応じて伸びるようにする */
-  min-height: 440px; /* 最小の高さだけ決めておく */
-  background-color: #fff;
-  border-radius: 24px; /* 角丸を復活させるとより「カード」らしくなります */
-  padding: 36px 24px 8px; /* 上の余白を多めにして番号との被りを調整 */
-  box-sizing: border-box;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* カード内の要素を均等に配置したい場合はこれ */
-  justify-content: flex-start;
+  gap: 47px;
 }
 
-/* --- タイトル部分 --- */
-.solution-header {
+.solution-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 343px;
+  min-height: 440px;
+  padding: 36px 24px 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  /* 番号部分 */
+}
+.solution-item .solution-number {
+  position: absolute;
+  top: -25px;
+  left: 10px;
+  color: #FFA891;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1;
+  z-index: 10;
+}
+.solution-item .solution-header {
   width: 100%;
   margin-bottom: 12px;
 }
-.solution-header .solution-title {
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 700;
+.solution-item .solution-header .solution-title {
   margin: 0;
-  color: #333;
+  color: #3E2A26;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
 }
-
-/* --- 説明文（ここを可変にする） --- */
-.solution-body {
+.solution-item .solution-body {
+  flex-grow: 1;
   width: 100%;
   margin-bottom: 8px;
-  flex-grow: 1; /* ★重要：タイトルが短くても、ここでスペースを調整して画像位置を揃える */
 }
-.solution-body p {
-  font-size: 14px;
-  line-height: 1.6;
+.solution-item .solution-body p {
   margin: 0;
   color: #666;
+  font-size: 14px;
+  line-height: 1.6;
 }
-
-/* --- 画像部分 (サイズを少し調整して収まりを良くする) --- */
-.solution-visual {
+.solution-item {
+  /* 画像部分（サイズを統合・固定） */
+}
+.solution-item .solution-visual {
   width: 270px;
-  height: 200px; /* ★高さを少し抑えると文字領域が確保しやすくなります */
-  margin-top: auto; /* 文字が少なくても一番下に配置される */
-  border-radius: 12px;
+  height: 274px;
+  margin-top: auto;
+  border-radius: 16px;
   overflow: hidden;
-  flex-shrink: 0; /* 画像が潰れないように固定 */
 }
-.solution-visual img {
+.solution-item .solution-visual img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-/* --- ①、②、③ の番号部分 --- */
-.solution-number {
-  position: absolute;
-  top: -25px; /* カードの淵に引っ掛ける */
-  left: 10px;
-  height: 56px;
-  color: #FFA891;
-  font-size: 50px; /* 少しサイズを調整 */
-  font-weight: 800;
-  z-index: 10;
-  line-height: 1;
-}
-
-/* --- 画像部分 (w:270 h:274) --- */
-/* --- 画像サイズを強制固定 (w:270 h:274) --- */
-.solution-visual {
-  /* ここでサイズをガチガチに固定します */
-  width: 270px !important;
-  min-width: 270px;
-  height: 274px !important;
-  min-height: 274px;
-  margin-bottom: 16px;
-  border-radius: 16px;
-  overflow: hidden;
-}
-.solution-visual img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover; /* 比率を保ちつつ枠を埋める */
-}
-
-/* --- 説明文 --- */
-.solution-body {
-  width: 100%;
-}
-.solution-body p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0;
-  color: #666;
-}
-
-/* YouTubeプレースホルダー */
+/* 動画セクション */
 .video-section {
   display: flex;
-  flex-direction: column; /* 縦に並べる */
-  align-items: center; /* ★これで水平方向の真ん中に寄る */
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   width: 100%;
   padding: 32px 0;
-  gap: 16px;
-  background-color: #F9F7F2; /* 背景を統一 */
+  background-color: #F9F7F2;
+  text-align: center;
 }
-
 .video-section p {
   font-size: 20px;
 }
-
-/* 動画本体の設定 */
 .video-section video {
-  width: 80%; /* スマホの両端に少し余裕を持たせる */
-  max-width: 343px; /* カードの横幅と同じにする */
-  height: auto; /* 比率を維持 */
-  border-radius: 16px; /* 角丸にして「救済カード」とデザインを合わせる */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 軽い影で高級感を出す */
+  width: 80%;
+  max-width: 343px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
+/* ==========================================================================
+   5. 20分の余白（セクション03）
+   ========================================================================== */
 .section-experience {
   padding: 80px 0;
+  background-color: #fff;
   text-align: center;
 }
 
 .experience-title {
-  font-size: 24px;
-  line-height: 1.6;
   margin-bottom: 24px;
   color: #333;
+  font-size: 24px;
+  line-height: 1.6;
 }
 
 .experience-copy {
   margin-bottom: 40px;
 }
 .experience-copy p {
+  color: #666;
   font-size: 15px;
   line-height: 1.8;
-  color: #666;
 }
 
-/* --- ギャラリー全体の枠 --- */
 .experience-gallery {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 17px; /* 上下の行の隙間 */
+  gap: 17px;
 }
-
-/* --- 上の段：2枚並び --- */
-.gallery-row-top {
-  display: flex;
-  justify-content: center;
-  gap: 17px; /* 左右の画像の隙間 (163+17+163 = 343px) */
-}
-.gallery-row-top .gallery-item {
-  width: 163px;
-  height: 200px;
-  border-radius: 16px;
+.experience-gallery .gallery-item {
   overflow: hidden;
-}
-.gallery-row-top .gallery-item img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover; /* サイズに合わせて切り抜き */
-}
-
-/* --- 下の段：1枚どっしり --- */
-.gallery-row-bottom .gallery-item {
-  width: 343px;
-  height: 248px;
   border-radius: 16px;
-  overflow: hidden;
+  background-color: #fff;
+  border: 8px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.gallery-row-bottom .gallery-item img {
+.experience-gallery .gallery-item img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
+.experience-gallery {
+  /* 上段の2枚並び */
+}
+.experience-gallery .gallery-row-top {
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+}
+.experience-gallery .gallery-row-top .gallery-item {
+  width: 163px;
+  height: 200px;
+  /* 遊び心の傾き */
+}
+.experience-gallery .gallery-row-top .gallery-item:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+.experience-gallery .gallery-row-top .gallery-item:nth-child(even) {
+  transform: rotate(2deg);
+}
+.experience-gallery {
+  /* 下段の1枚 */
+}
+.experience-gallery .gallery-row-bottom .gallery-item {
+  width: 343px;
+  height: 248px;
+}
 
+/* ==========================================================================
+   6. 手紙（セクション04）
+   ========================================================================== */
 .letter {
   margin-bottom: 80px;
 }
@@ -765,7 +803,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   /* padding: 0;  必要に応じて余白を調整 */
 }
@@ -789,7 +827,7 @@ h2 {
 }
 .footer-nav a {
   text-decoration: none;
-  color: #666;
+  color: #7D6B67;
   font-size: 14px;
   transition: all 0.3s ease; /* --- 追加：アニメーション --- */
 }
@@ -803,7 +841,7 @@ h2 {
 
 .copyright {
   font-size: 12px;
-  color: #999;
+  color: #7D6B67;
 }
 
 /* --- 下部 固定ダウンロードバーの設定 --- */
@@ -843,4 +881,303 @@ h2 {
   width: auto;
 }
 
-/* 最後のコンテンツが隠れないように余白を作る *//*# sourceMappingURL=style.css.map */
+/* ==========================================================================
+   PC版レイアウト設定 (1024px以上)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  /* 1. 全体のレイアウト：スマホ枠を右に寄せる */
+  .pc-layout {
+    display: flex;
+    justify-content: flex-end; /* 子要素（スマホ枠）を右端へ */
+    right: 20%;
+    background-color: #F9F7F2; /* PC全体の背景色（お好みで） */
+    min-height: 100vh;
+    position: relative;
+  }
+  /* 2. 【左側】固定サイドバーの設定 */
+  .pc-sidebar {
+    display: flex;
+    position: fixed; /* 画面の左端に固定 */
+    top: 0;
+    left: 0;
+    width: calc(100% - 375px); /* 右側のスマホ幅を引いた残り全部 */
+    height: 100vh;
+    padding: 60px;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none; /* 背後のスマホ枠のスクロールを邪魔しない */
+  }
+  /* サイドバーの中身（ここはクリックできるようにする） */
+  .sidebar-inner {
+    pointer-events: auto;
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+  }
+  .sidebar-logo img {
+    width: 200px;
+    margin-bottom: 40px;
+    display: block;
+  }
+  /* サイドバーのメニューデザイン */
+  .sidebar-nav .menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 60px 0;
+  }
+  .sidebar-nav .menu-list li {
+    margin-bottom: 25px;
+  }
+  .sidebar-nav .menu-list li a {
+    font-size: 20px;
+    text-decoration: none;
+    color: #3E2A26;
+    font-weight: 700;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+  }
+  .sidebar-nav .menu-list li a:hover {
+    color: #FFA891; /* #FFA891 */
+    padding-left: 8px; /* 少し動くオシャレな演出 */
+  }
+  /* サイドバーのダウンロードエリア */
+  .sidebar-download {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .sidebar-download p {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  .download-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+  }
+  .download-btns img {
+    height: 45px;
+    width: auto;
+    transition: opacity 0.3s;
+  }
+  .download-btns a:hover img {
+    opacity: 0.8;
+  }
+  /* 3. 【右側】スマホ枠の設定 */
+  .mobile-frame-wrapper {
+    width: 375px; /* 幅を375pxに固定 */
+    min-width: 375px;
+    background-color: #fff;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05); /* 左側に境界の影 */
+    position: relative;
+    z-index: 20;
+    min-height: 100vh;
+  }
+  /* 4. PC版では「固定」を解除する要素 */
+  /* 上部ヘッダー：固定せず、スマホ枠の最上部に置く */
+  .site-header {
+    position: absolute !important;
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 55px !important; /* 縮小させない */
+    background-color: #8DA390 !important;
+  }
+  /* スマホ専用のボタンやバーは非表示 */
+  .hamburger-btn,
+  .download-container.is-fixed {
+    display: none !important;
+  }
+  /* 5. コンテンツの微調整（PCで見やすく） */
+  main {
+    padding-top: 55px; /* ヘッダーがabsoluteなので、その分下げる */
+  }
+}
+/* ==========================================================================
+   スマホ版レイアウト (1024px未満)
+   ========================================================================== */
+@media (max-width: 1023px) {
+  /* PC用サイドバーを完全に消す */
+  .pc-sidebar {
+    display: none;
+  }
+  /* スマホ時は幅いっぱいに表示 */
+  .mobile-frame-wrapper {
+    width: 100%;
+  }
+}
+/* 会社情報の全体設定 */
+.company-page {
+  max-width: 600px; /* 読みやすい幅に制限 */
+  margin: 0 auto;
+  padding: 60px 16px;
+  color: #7D6B67; /* 指定：#7D6B67 */
+}
+
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 48px;
+  letter-spacing: 0.1em;
+}
+
+/* --- プロフィール部分 (16px) --- */
+.company-profile {
+  font-size: 16px; /* 指定：16px */
+  line-height: 1.8;
+  margin-bottom: 80px;
+}
+
+.profile-list {
+  border-top: 1px solid #EAE0DD; /* 上に区切り線 */
+}
+.profile-list dt {
+  font-weight: 700;
+  padding: 24px 0 8px;
+  color: #8DA390; /* 項目名はメインカラーにしてアクセントに */
+}
+.profile-list dd {
+  margin-left: 0; /* デフォルトのインデントをリセット */
+  padding-bottom: 24px;
+  border-bottom: 1px solid #EAE0DD; /* 項目ごとに線を引く */
+}
+.profile-list dd ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.profile-list dd ul li {
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 4px;
+}
+.profile-list dd ul li::before {
+  content: "・"; /* リストの点を「・」に */
+  position: absolute;
+  left: 0;
+}
+
+/* --- ミッション部分 --- */
+.company-mission {
+  text-align: center;
+  background-color: #F9F7F6; /* ほんのり色をつけて特別感を出す */
+  padding: 60px 0px;
+  border-radius: 24px;
+  margin-bottom: 80px;
+}
+
+.mission-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin-bottom: 24px;
+  display: block;
+  color: #FFA891; /* ミッションラベルを目立たせる */
+}
+
+.mission-text {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  color: #7D6B67;
+  /* blockquoteのデフォルトの余白をリセット */
+  padding: 0;
+}
+
+.mission-description {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* --- フッター（戻るボタン） --- */
+.company-footer {
+  text-align: center;
+}
+
+.back-link a {
+  text-decoration: none;
+  color: #7D6B67;
+  font-size: 14px;
+  padding: 12px 24px;
+  border: 1px solid #EAE0DD;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.back-link a:hover {
+  background-color: #EAE0DD;
+  color: #fff;
+}
+
+/* 利用規約ページ全体のコンテナ（カンパニーページと共通の幅にすると統一感が出ます） */
+.terms-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+  color: #7D6B67; /* 指定：#7D6B67 */
+  background-color: #F9F7F2; /* 背景をベースカラーにして落ち着かせる */
+  line-height: 1.8;
+}
+
+/* メインタイトル */
+.terms-main-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: 0.1em;
+}
+
+/* 各セクションの見出し（1. はじめに 等） */
+.terms-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 40px 0 16px;
+  padding-left: 8px;
+  border-left: 4px solid #8DA390; /* 横棒を入れて視認性をアップ */
+}
+
+/* 本文テキスト */
+.terms-text {
+  margin-bottom: 24px;
+}
+.terms-text p {
+  font-size: 12px; /* 指定：12px */
+  margin: 0;
+  /* 改行コード（<br>）がある場合、少し行間を広めにとると読みやすいです */
+}
+
+/* 強調したい部分（「100点満点の料理」ではなく…） */
+.highlight {
+  display: inline-block;
+  background: linear-gradient(transparent 70%, #FDF2F0 70%); /* 薄いアクセントカラーで下線を引く */
+  font-weight: 700;
+  padding: 0 2px;
+}
+
+/* フッター（戻るボタン）- カンパニーページと共通 */
+.back-link {
+  margin-top: 80px;
+  text-align: center;
+}
+.back-link a {
+  text-decoration: none;
+  color: #7D6B67;
+  font-size: 14px;
+  padding: 12px 32px;
+  border: 1px solid #EAE0DD;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.back-link a:hover {
+  background-color: #EAE0DD;
+  color: #fff;
+}/*# sourceMappingURL=style.css.map */
