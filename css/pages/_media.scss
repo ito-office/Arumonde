@@ -5,30 +5,31 @@
    ========================================================================== */
 @media (min-width: 1024px) {
 
-    /* 1. 全体のレイアウト：スマホ枠を右に寄せる */
-    .pc-layout {
-        display: flex;
-        justify-content: flex-end; /* 子要素（スマホ枠）を右端へ */
-        right: 20%;
-        background-color: #F9F7F2; /* PC全体の背景色（お好みで） */
-        min-height: 100vh;
-        position: relative;
-    }
+/* 1. 全体のレイアウト：スマホ枠を右に寄せる */
+.pc-layout {
+    display: flex;
+    justify-content: flex-end; /* 子要素（スマホ枠）を右端へ */
+    right: 20%;
+    background-color: #F9F7F2; /* PC全体の背景色（お好みで） */
+    height: 100vh;
+    position: relative;
+    overflow: hidden; /* ブラウザ全体のスクロールを禁止 */
+}
 
-    /* 2. 【左側】固定サイドバーの設定 */
-    .pc-sidebar {
-        display: flex;
-        position: fixed;   /* 画面の左端に固定 */
-        top: 0;
-        left: 0;
-        width: calc(100% - 375px); /* 右側のスマホ幅を引いた残り全部 */
-        height: 100vh;
-        padding: 60px;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        pointer-events: none; /* 背後のスマホ枠のスクロールを邪魔しない */
-    }
+/* 2. 【左側】固定サイドバーの設定 */
+.pc-sidebar {
+    display: flex;
+    position: fixed;   /* 画面の左端に固定 */
+    top: 0;
+    left: 0;
+    width: calc(100% - 375px); /* 右側のスマホ幅を引いた残り全部 */
+    height: 100vh;
+    padding: 60px;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none; /* 背後のスマホ枠のスクロールを邪魔しない */
+}
 
     /* サイドバーの中身（ここはクリックできるようにする） */
     .sidebar-inner {
@@ -71,8 +72,10 @@
 
     /* サイドバーのダウンロードエリア */
     .sidebar-download{
-        text-align: center;
-        margin-top: 40px;
+        text-align: left;
+        // margin-top: 40px;
+        margin-top: 60px;   /* メニューとの間隔を少し広げるとオシャレ */
+        width: 100%;        /* 幅いっぱいに使って中央判定を正確に */
     }
 
     .sidebar-download p {
@@ -80,26 +83,39 @@
         font-size: 14px;
         margin-bottom: 20px;
         color: #666;
+
+        line-height: 1.6;
     }
 
     .download-btns {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         gap: 12px;
         list-style: none;
         padding: 0;
     }
 
-    .download-btns img {
-        height: 45px;
-        width: auto;
-        transition: opacity 0.3s;
-    }
+    /* ストアボタンとシェアボタン共通のリンク設定 */
+.download-btns li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
 
-    .download-btns a:hover img {
-        opacity: 0.8;
-    }
+.download-btns li a:hover {
+    opacity: 0.8;
+    transform: translateY(-2px); /* 少し浮き上がる演出 */
+}
+
+/* ストアボタン（AppStore / GooglePlay）のサイズ */
+.download-btns img[alt="App Store"],
+.download-btns img[alt="Google Play"], 
+.download-btns img[alt="share"]{
+    height: 40px; /* 少しだけ小さくするとシェアボタンと馴染みます */
+    width: auto;
+}
 
     /* 3. 【右側】スマホ枠の設定 */
     .mobile-frame-wrapper {
@@ -109,7 +125,9 @@
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05); /* 左側に境界の影 */
         position: relative;
         z-index: 20;
-        min-height: 100vh;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     /* 4. PC版では「固定」を解除する要素 */
@@ -136,6 +154,61 @@
     }
 }
 
+.pc-character-area {
+        position: fixed;
+        right: 5%;      /* 右端からの距離（隙間に合わせて調整） */
+        bottom: 10%;    /* 下からの位置 */
+        width: 150px;   /* キャラクターのサイズ */
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        pointer-events: none; /* クリックの邪魔をしない */
+    }
+
+    /* キャラクター画像 */
+    #js-misaki-img {
+        width: 100%;
+        height: auto;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        /* ふわふわ浮遊アニメーション */
+        animation: floating 3s ease-in-out infinite;
+        transform-origin: bottom center; /* 足元を基準に大きくする */
+    }
+    
+    #js-misaki-img.is-large {
+        width: 140%; /* 親要素(160px)を突き抜けて大きくする */
+        /* transform: scale(1.3); でもOKですが、widthの方が制御しやすいです */
+    }
+
+
+    /* 吹き出し（お好みで） */
+    .character-bubble {
+        background: #fff;
+        border: 2px solid #8DA390;
+        border-radius: 15px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        position: relative;
+        font-size: 12px;
+        font-weight: 700;
+        color: #7D6B67;
+        opacity: 0; /* 最初は隠しておく */
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+    }
+    .character-bubble.is-show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @keyframes floating {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+
 /* ==========================================================================
    スマホ版レイアウト (1024px未満)
    ========================================================================== */
@@ -143,6 +216,9 @@
     /* PC用サイドバーを完全に消す */
     .pc-sidebar {
         display: none;
+    }
+    .pc-character-area { 
+        display: none; 
     }
     
     /* スマホ時は幅いっぱいに表示 */
