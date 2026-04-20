@@ -328,14 +328,25 @@ main {
 
 /* ロゴのサイズ調整 */
 .header-logo img {
-  height: 35px; /* 少し大きく調整 */
+  height: 30px;
   width: auto;
   display: block;
   -o-object-fit: contain;
      object-fit: contain;
 }
 
-/* ハンバーガーメニュー自体も375px内に収める */
+.header-logo a {
+  display: inline-flex;
+  align-items: center;
+  background-color: #F9F7F2; /* ロゴの後ろだけ白くする */
+  padding: 4px 10px;
+  border-radius: 20px; /* 角丸で柔らかい印象に */
+  height: 40px; /* ヘッダーの高さに合わせて調整 */
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* ほんの少し影を付けるとより引き立ちます */
+}
+
 /* --- 3. ハンバーガーボタン（三本線の位置修正済み） --- */
 .hamburger-btn {
   -webkit-appearance: none;
@@ -471,7 +482,6 @@ main {
   color: #FFA891;
 }
 
-/* ダウンロードエリア */
 .download-container ul {
   display: flex;
   list-style: none;
@@ -544,7 +554,23 @@ h2 {
   padding: 16px;
 }
 
+.despair-container {
+  width: 100%;
+  max-width: 375px; /* スマホの基準幅に合わせる */
+  margin: 0 auto; /* コンテナ自体を中央寄せ */
+}
+
+.despair-content-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 子要素（カード）を中央に寄せる */
+  gap: 30px; /* カード同士の縦の隙間 */
+  padding: 0 16px; /* 左右に余白を持たせる */
+}
+
 .despair-card {
+  width: 100%;
+  max-width: 343px; /* 救済編のカード幅と合わせると統一感が出ます */
   background: #fff;
   border-radius: 16px;
   padding: 20px;
@@ -558,6 +584,15 @@ h2 {
 }
 .despair-card .scene-body p {
   text-align: center;
+}
+.despair-card {
+  /* 画像がはみ出さないように調整 */
+}
+.despair-card .scene-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
 
 /* ==========================================================================
@@ -660,7 +695,7 @@ h2 {
   font-size: 20px;
 }
 .video-section video {
-  width: 80%;
+  width: 100%;
   max-width: 343px;
   height: auto;
   border-radius: 16px;
@@ -705,12 +740,19 @@ h2 {
   background-color: #fff;
   border: 8px solid #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* 【追加】回転によるボケ（エイリアス）を防ぐおまじない */
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 .experience-gallery .gallery-item img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  /* 【追加】ブラウザの画像描画アルゴリズムを最適化 */
+  image-rendering: auto; /* 他のブラウザ用 */
+  /* Safariなどでボケるのを防ぐおまじない（追加推奨） */
+  transform: translateZ(0);
 }
 .experience-gallery {
   /* 上段の2枚並び */
@@ -723,6 +765,8 @@ h2 {
 .experience-gallery .gallery-row-top .gallery-item {
   width: 163px;
   height: 200px;
+  /* 回転させる要素にはこれを入れておくと綺麗になります */
+  will-change: transform;
   /* 遊び心の傾き */
 }
 .experience-gallery .gallery-row-top .gallery-item:nth-child(odd) {
@@ -811,7 +855,7 @@ h2 {
 /* --- コピーライトなどの情報部分 --- */
 .footer-info {
   background-color: #F9F7F2; /* ベースカラー背景 */
-  padding: 16px 20px 80px; /* 固定バーが被るので下を多めに */
+  padding: 16px 20px 72px; /* 固定バーが被るので下を多めに */
   text-align: center;
   position: relative; /* z-indexのため */
   z-index: 10; /* 画像より上に配置 */
@@ -1023,21 +1067,24 @@ h2 {
   flex-direction: column;
   align-items: center;
   pointer-events: none; /* クリックの邪魔をしない */
+  justify-content: flex-end; /* 足元を基準に並べる */
+  height: 300px; /* 十分な高さを確保しておく */
 }
 
 /* キャラクター画像 */
 #js-misaki-img {
   width: 100%;
   height: auto;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease;
   /* ふわふわ浮遊アニメーション */
   animation: floating 3s ease-in-out infinite;
   transform-origin: bottom center; /* 足元を基準に大きくする */
 }
 
 #js-misaki-img.is-large {
-  width: 140%; /* 親要素(160px)を突き抜けて大きくする */
-  /* transform: scale(1.3); でもOKですが、widthの方が制御しやすいです */
+  /* 親要素(150px)を突き抜けるために max-width を解除します */
+  max-width: none !important;
+  width: 150%; /* 140%〜160%くらいでお好みで調整してください */
 }
 
 /* 吹き出し（お好みで） */

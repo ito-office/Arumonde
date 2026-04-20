@@ -68,7 +68,7 @@
 /* --- コピーライトなどの情報部分 --- */
 .footer-info {
     background-color: $baseColor; /* ベースカラー背景 */
-    padding: 16px 20px 80px; /* 固定バーが被るので下を多めに */
+    padding: 16px 20px 72px; /* 固定バーが被るので下を多めに */
     text-align: center;
     position: relative; /* z-indexのため */
     z-index: 10; /* 画像より上に配置 */

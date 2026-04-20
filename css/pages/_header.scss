@@ -14,28 +14,15 @@ main {
 
 /* 2. ヘッダーの配置を修正 */
 .site-header {
-  position: fixed;
-  top: 0;
-  left: 0;   /* 一旦左詰めに */
-  width: 100%;
-  height: 55px;
-  background-color: #8DA390;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;   /* 一旦左詰めに */
+    width: 100%;
+    height: 55px;
+    background-color: #8DA390;
+    z-index: 1000;
   /* スマホ版では中央寄せにする必要はありません。幅100%でOK */
 }
-
-// .site-header {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 55px;
-//     background-color: $mainColor;
-//     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-//     z-index: 1000;
-//     /* ...既存の設定... */
-//     transition: height 0.3s ease, background-color 0.3s ease; /* アニメーションを滑らかに */
-// }
 
 /* ヘッダーが縮んだ時のクラス（JSで制御） */
 .site-header.is-scrolled {
@@ -53,43 +40,25 @@ main {
     box-sizing: border-box; /* パディングを含めて375pxにする */
 }
 
-// .header-inner {
-//     max-width: 375px; /* スマホ基準 */
-//     margin: 0 auto;
-//     height: 100%;
-//     padding: 0 8px; 
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     background-color: $mainColor; /* ロゴの背景が白く見える場合はここをチェック */
-// }
-
 /* ロゴのサイズ調整 */
 .header-logo img {
-    height: 35px; /* 少し大きく調整 */
+    height: 30px; 
     width: auto;
     display: block;
     object-fit: contain;
 }
 
-/* ハンバーガーメニュー自体も375px内に収める */
-// #hamburger-menu {
-//     position: fixed;
-//     top: 0;
-//     left: 50%;
-//     transform: translateX(-50%) translateY(-100%); /* 中央配置＋上に隠す */
-//     width: 100%;
-//     max-width: 375px;
-//     height: 100vh;
-//     background-color: rgba(255, 255, 255, 0.95);
-//     backdrop-filter: blur(8px);
-//     z-index: 950; /* ボタンより下に配置 */
-//     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-// }
-
-// #hamburger-menu.is-active {
-//     transform: translateX(-50%) translateY(0);
-// }
+.header-logo a {
+    display: inline-flex;
+    align-items: center;
+    background-color: $baseColor; /* ロゴの後ろだけ白くする */
+    padding: 4px 10px;
+    border-radius: 20px; /* 角丸で柔らかい印象に */
+    height: 40px; /* ヘッダーの高さに合わせて調整 */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* ほんの少し影を付けるとより引き立ちます */
+}
 
 /* --- 3. ハンバーガーボタン（三本線の位置修正済み） --- */
 .hamburger-btn {
@@ -217,10 +186,6 @@ main {
 .menu-list li a:active {
     color: #FFA891;
 }
-/* ダウンロードエリア */
-// .download-container {
-//     margin-bottom: 40px;
-// }
 
 .download-container ul {
     display: flex;

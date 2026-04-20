@@ -164,21 +164,25 @@
         flex-direction: column;
         align-items: center;
         pointer-events: none; /* クリックの邪魔をしない */
+        
+        justify-content: flex-end; /* 足元を基準に並べる */
+        height: 300px; /* 十分な高さを確保しておく */
     }
 
     /* キャラクター画像 */
     #js-misaki-img {
         width: 100%;
         height: auto;
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease;
         /* ふわふわ浮遊アニメーション */
         animation: floating 3s ease-in-out infinite;
         transform-origin: bottom center; /* 足元を基準に大きくする */
     }
-    
+
     #js-misaki-img.is-large {
-        width: 140%; /* 親要素(160px)を突き抜けて大きくする */
-        /* transform: scale(1.3); でもOKですが、widthの方が制御しやすいです */
+        /* 親要素(150px)を突き抜けるために max-width を解除します */
+        max-width: none !important; 
+        width: 150%; /* 140%〜160%くらいでお好みで調整してください */
     }
 
 

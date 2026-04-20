@@ -38,7 +38,7 @@ window.addEventListener('scroll', function() {
 
     // 2. タイミングを調整する数字（オフセット）
     // この数字を大きくするほど、早いタイミング（上の方）でバーが出てきます
-    const offset = 770; 
+    const offset = 780; 
 
     // 3. 判定（Heroの底まであと400pxの地点を過ぎたら表示）
     if (window.pageYOffset > (heroBottom - offset)) {
@@ -154,7 +154,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         } else {
                             misakiImg.classList.remove('is-large');
                         }
-                        
+
                         misakiImg.style.opacity = 1;
                         bubble.classList.add('is-show');
                     }, 300);
